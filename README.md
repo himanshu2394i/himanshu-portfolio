@@ -18,7 +18,7 @@ Recruiters: start at **The Short Version** (the Recruiter seat lands there), or 
 | Box Office | Commits per system, from git history |
 | Say it once | The growth pitch: a split-screen series, the funnel and its two metrics, a four-week shooting schedule |
 | Behind the Scenes | The flat (tap the props) and DTU myths, fact-checked |
-| Bloopers | Voice-typing slips, and the real voice notes that built this issue |
+| Bloopers | Voice-typing slips, and how the issue was built by voice |
 | The Critics' Corner | Essays and posts; one essay in full at `/writing/dangerous-failures` |
 
 A **commentary track** (header toggle, on by default for the Recruiter seat, offered once to everyone else) adds one-line margin notes on what each section shows.

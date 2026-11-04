@@ -248,12 +248,10 @@ test.describe("the issue", () => {
     await expect(page.locator("#boxoffice")).not.toContainText("AGENNTT");
   });
 
-  test("the voice notes that built the issue link to what they became; bloopers are framed honestly", async ({ page }) => {
+  test("no verbatim voice notes are shown; bloopers are framed honestly", async ({ page }) => {
     await page.goto("/");
-    const notes = page.locator("#voicenotes li");
-    await expect(notes).toHaveCount(3);
-    for (const href of ["#top", "#flat", "#growth"]) await expect(page.locator(`#voicenotes a[href="${href}"]`)).toHaveCount(1);
-    await expect(page.locator("#voicenotes")).toContainText("The Godfather");
+    await expect(page.locator("#voicenotes")).toHaveCount(0);
+    await expect(page.locator("body")).not.toContainText("The Godfather");
     await expect(page.locator("#bloopers .sub")).not.toContainText("normal voice typing");
     await expect(page.locator("#bloopers .sub")).toContainText("dictionary");
   });
@@ -437,14 +435,14 @@ test.describe("the issue", () => {
     expect(Math.abs(lede.y - fig.y)).toBeLessThan(fig.height);
   });
 
-  test("on desktop the making-of card stays in view beside the long bloopers column", async ({ page, isMobile }) => {
+  test("on desktop the making-of card is fully in view beside the bloopers", async ({ page, isMobile }) => {
     test.skip(isMobile, "desktop layout");
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
-    await page.locator("#voicenotes").scrollIntoViewIfNeeded();
-    await page.evaluate(() => document.querySelector("#voicenotes")!.scrollIntoView());
-    const top = await page.locator(".bloopers .vslot").evaluate((e) => e.getBoundingClientRect().top);
-    expect(top).toBeGreaterThanOrEqual(0);
+    await page.evaluate(() => document.querySelector(".bloopers .takes")!.scrollIntoView());
+    const box = await page.locator(".bloopers .vslot").evaluate((e) => { const r = e.getBoundingClientRect(); return { top: r.top, bottom: r.bottom }; });
+    expect(box.top).toBeGreaterThanOrEqual(0);
+    expect(box.bottom).toBeLessThanOrEqual(900);
   });
 
   test("no sideways scroll", async ({ page }) => {

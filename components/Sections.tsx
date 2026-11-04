@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import {
-  agent, bloopers, boxOffice, factFile, reviews, videos, voiceNotes, cast, classifieds, coverLines, directorsNote, heist, origin, platform, programme, site, voice, writing,
+  agent, bloopers, boxOffice, factFile, reviews, videos, cast, classifieds, coverLines, directorsNote, heist, origin, platform, programme, site, voice, writing,
 } from "@/lib/content";
 import Link from "next/link";
 import { asset } from "@/lib/asset";
@@ -380,17 +380,6 @@ export function Bloopers() {
           <ul className="takes">
             {bloopers.map(([meant, heard]) => <li key={meant}><span className="heard">{heard}</span><span className="meant">I said: {meant}</span></li>)}
           </ul>
-          <div className="voicenotes" id="voicenotes">
-            <h3>Dailies: the voice notes that built this issue</h3>
-            <ul>
-              {voiceNotes.map((n) => (
-                <li key={n.href}>
-                  <p><span className="rec" aria-hidden="true" />&ldquo;{n.said}&rdquo;</p>
-                  <a href={n.href}>Became: {n.became}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
           <blockquote>&ldquo;{voice.quote}&rdquo;</blockquote>
           <p className="how">{voice.how}</p>
         </div>

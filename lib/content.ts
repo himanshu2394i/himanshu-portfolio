@@ -265,13 +265,6 @@ export const bloopers = [
   ["AMFI", "MF1"],
 ] as [string, string][];
 
-// Verbatim excerpts of Himanshu's own dictated messages while building this site, and what each became.
-export const voiceNotes = [
-  { said: "Actually you should take inspiration from gangster movies, like the old ones, like The Godfather 1, The Godfather 2, and you remember.", became: "The cinema issue you're reading", href: "#top" },
-  { said: "What do you think about if we add a kind of a college like feel to it, or you know, a bachelor's flat feel to it?", became: "Behind the scenes: the flat", href: "#flat" },
-  { said: "we can show a person using voice-to-texting and getting wrong words into it and having to say out his Gmail and everything again and again.", became: "Say it once", href: "#growth" },
-];
-
 export const voice = {
   quote: "It makes me want to express myself more, have more opinions, and be more productive.",
   how: "Every page here was spoken, not typed. I talked through my story, my projects and every design change into Wispr Flow, straight into the AI I built it with. Long, messy, full of context, which is exactly what made the answers better.",

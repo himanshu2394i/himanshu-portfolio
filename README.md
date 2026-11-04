@@ -28,7 +28,7 @@ Other pages: `/cv` (and `/resume`), a one-page CV with a PDF download; `/writing
 ## Before you submit (needs Himanshu)
 
 - [ ] **Record the videos.** Put files in `public/video/` and set their paths in the `videos` map in `lib/content.ts`; until then each slot shows a "Now filming" card.
-- [ ] **Pick a host** (Vercel or GitHub Pages, both ready) and set `NEXT_PUBLIC_SITE_URL`; then regenerate the CV PDF so its essay link points at the live site.
+- [x] **Host:** live on GitHub Pages at https://himanshu2394i.github.io/himanshu-portfolio/ (deploys on every push to `main`). The CV PDF has no site-dependent links, so it needs no regeneration.
 - [ ] **Confirm the bloopers' source.** They are captioned as what voice typing heard before the words were in the dictionary. If they came from Wispr Flow, that caption is right; the episode-one script still labels its left screen "normal voice typing" as a pitch device.
 - [ ] **Confirm the RAG engine date.** Its repo was created in Apr 2026, after the Feb 2026 llm4s PRs, but the story tells it first; that frame is undated until you confirm.
 - [ ] **Essay and post links.** LinkedIn clippings link to your activity feed; give the exact post URLs if you want them linked one by one.

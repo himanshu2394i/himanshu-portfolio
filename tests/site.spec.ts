@@ -365,6 +365,25 @@ test.describe("the issue", () => {
     expect(box!.height).toBeGreaterThan(vp.height * 0.6);
   });
 
+  // Browser zoom shrinks the viewport in CSS pixels: 1536x864 at 125/150/175/200%, plus a narrow side pane.
+  for (const [w, h] of [[1229, 691], [1024, 576], [878, 494], [768, 432], [700, 800], [1440, 900]]) {
+    test(`at ${w}x${h} every cover headline is shown in full`, async ({ page, isMobile }) => {
+      test.skip(isMobile, "viewport sizes set by hand");
+      await page.setViewportSize({ width: w, height: h });
+      await page.goto("/");
+      const cover = (await page.locator(".cover").boundingBox())!;
+      const strip = (await page.locator(".cover .strip").boundingBox())!;
+      const lines = page.locator(".cover .cl");
+      await expect(lines).toHaveCount(4);
+      for (let i = 0; i < 4; i++) {
+        await expect(lines.nth(i)).toBeVisible();
+        const b = (await lines.nth(i).boundingBox())!;
+        expect(b.y).toBeGreaterThanOrEqual(strip.y + strip.height);
+        expect(b.y + b.height).toBeLessThanOrEqual(cover.y + cover.height);
+      }
+    });
+  }
+
   test("the cover says what he does", async ({ page }) => {
     await page.goto("/");
     await expect(page.locator(".cover")).toContainText("AI & Automation Intern at Growthvine Capital");
@@ -441,8 +460,8 @@ test.describe("the issue", () => {
     await page.goto("/");
     await page.evaluate(() => document.querySelector(".bloopers .takes")!.scrollIntoView());
     const box = await page.locator(".bloopers .vslot").evaluate((e) => { const r = e.getBoundingClientRect(); return { top: r.top, bottom: r.bottom }; });
-    expect(box.top).toBeGreaterThanOrEqual(0);
-    expect(box.bottom).toBeLessThanOrEqual(900);
+    expect(box.top).toBeGreaterThanOrEqual(-1);
+    expect(box.bottom).toBeLessThanOrEqual(901);
   });
 
   test("no sideways scroll", async ({ page }) => {

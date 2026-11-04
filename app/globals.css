@@ -825,3 +825,14 @@ section[tabindex="-1"]:focus { outline: none; }
   .ff-wins a span { grid-column: 2; }
 }
 @media (max-width: 820px) { .ff-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; } }
+
+/* ---------- Cover grows with its headlines, so browser zoom never clips them ---------- */
+.cover .lines { position: relative; top: auto; margin-top: calc(clamp(64px, 14vw, 176px) + 84px); padding-bottom: 104px; }
+@media (max-width: 820px) {
+  .cover { display: flex; flex-direction: column; }
+  .cover .strip { top: 0; margin-top: calc(clamp(64px, 14vw, 176px) * .92 + 30px); }
+  .cover .lines { bottom: auto; margin-top: auto; padding-top: 24px; padding-bottom: 78px; }
+  .cover .cl:nth-child(n+3) { display: block; }
+}
+/* Real phones keep the photo clear: one headline, the rest are a scroll away. */
+@media (max-width: 599px) { .cover .cl:nth-child(n+3) { display: none; } }

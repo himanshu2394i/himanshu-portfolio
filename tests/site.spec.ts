@@ -365,11 +365,7 @@ test.describe("the issue", () => {
     expect(box!.height).toBeGreaterThan(vp.height * 0.6);
   });
 
-  // Browser zoom shrinks the viewport in CSS pixels: 1536x864 at 125/150/175/200%, plus a narrow side pane.
-  for (const [w, h] of [[1229, 691], [1024, 576], [878, 494], [768, 432], [700, 800], [1440, 900]]) {
-    test(`at ${w}x${h} every cover headline is shown in full`, async ({ page, isMobile }) => {
-      test.skip(isMobile, "viewport sizes set by hand");
-      await page.setViewportSize({ width: w, height: h });
+  const allCoverHeadlinesShown = async (page: import("@playwright/test").Page) => {
       await page.goto("/");
       const cover = (await page.locator(".cover").boundingBox())!;
       const strip = (await page.locator(".cover .strip").boundingBox())!;
@@ -381,8 +377,21 @@ test.describe("the issue", () => {
         expect(b.y).toBeGreaterThanOrEqual(strip.y + strip.height);
         expect(b.y + b.height).toBeLessThanOrEqual(cover.y + cover.height);
       }
+  };
+
+  // Browser zoom shrinks the viewport in CSS pixels: 1536x864 at 125/150/175/200%, a narrow side pane, a small phone.
+  for (const [w, h] of [[1229, 691], [1024, 576], [878, 494], [768, 432], [700, 800], [1440, 900], [360, 640]]) {
+    test(`at ${w}x${h} every cover headline is shown in full`, async ({ page, isMobile }) => {
+      test.skip(isMobile, "viewport sizes set by hand");
+      await page.setViewportSize({ width: w, height: h });
+      await allCoverHeadlinesShown(page);
     });
   }
+
+  test("on phones every cover headline is shown in full", async ({ page, isMobile }) => {
+    test.skip(!isMobile, "phone devices");
+    await allCoverHeadlinesShown(page);
+  });
 
   test("the cover says what he does", async ({ page }) => {
     await page.goto("/");

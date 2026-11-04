@@ -834,5 +834,3 @@ section[tabindex="-1"]:focus { outline: none; }
   .cover .lines { bottom: auto; margin-top: auto; padding-top: 24px; padding-bottom: 78px; }
   .cover .cl:nth-child(n+3) { display: block; }
 }
-/* Real phones keep the photo clear: one headline, the rest are a scroll away. */
-@media (max-width: 599px) { .cover .cl:nth-child(n+3) { display: none; } }
